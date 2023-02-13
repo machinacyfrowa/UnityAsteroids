@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     private Transform gunLeft, gunRight;
     private bool fireButtonDown = false;
 
+    private CameraScript cs;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         gunLeft = transform.Find("GunLeft");
         gunRight = transform.Find("GunRight");
+        cs = Camera.main.GetComponent<CameraScript>();
     }
 
     // Update is called once per frame
@@ -30,19 +33,24 @@ public class PlayerController : MonoBehaviour
         //if(v != 0 && h != 0)
         controlls = new Vector2(h, v);
 
-        //check and reposition ship if off screen (x < -19; x > 19; y < -9, y > 9)
-        if(Mathf.Abs(transform.position.x) > 19)
+        //check and reposition ship if off screen
+        //maksymalne oddalenie od œrodka w poziomie to szerokoœæ widzianego obszaru / 2
+        float maxHorizontal = cs.worldWidth / 2; 
+        //to samo dla wysokoœæi
+        float maxVertical = cs.worldHeight / 2;
+
+        if(Mathf.Abs(transform.position.x) > maxHorizontal)
         {
-            Vector3 newPosition = new Vector3(transform.position.x * -1, 
+            Vector3 newPosition = new Vector3(transform.position.x * -0.95f, 
                                               0, 
                                               transform.position.z);
             transform.position = newPosition;
         }
-        if (Mathf.Abs(transform.position.z) > 9)
+        if (Mathf.Abs(transform.position.z) > maxVertical)
         {
             Vector3 newPosition = new Vector3(transform.position.x,
                                               0,
-                                              transform.position.z * -1);
+                                              transform.position.z * -0.95f);
             transform.position = newPosition;
         }
 
