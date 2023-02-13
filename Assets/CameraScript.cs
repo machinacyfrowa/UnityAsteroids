@@ -25,6 +25,6 @@ public class CameraScript : MonoBehaviour
         //policz szerokoœæ z wspó³czynnika proporcji kamery
         worldWidth = worldHeight * mainCamera.aspect;
 
-        Debug.Log("Wielkoœæ pola gry: " + worldWidth + " x " + worldHeight);
+        //Debug.Log("Wielkoœæ pola gry: " + worldWidth + " x " + worldHeight);
     }
 }
