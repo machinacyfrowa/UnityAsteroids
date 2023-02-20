@@ -80,4 +80,25 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject other = collision.gameObject;
+        if(other.CompareTag("Asteroid"))
+        {
+            //game over
+            Time.timeScale = 0;
+
+            //poka¿ ekran koñcowy
+            GameObject gameOverScreen = GameObject.Find("Canvas").transform.Find("GameOverScreen").gameObject;
+            gameOverScreen.SetActive(true);
+
+            //niszczymy asteroide
+            Destroy(other);
+
+            //niszczymy gracza
+            Destroy(gameObject);
+
+
+        }
+    }
 }

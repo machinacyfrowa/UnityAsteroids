@@ -31,4 +31,18 @@ public class AsteroidScript : MonoBehaviour
     {
         
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject other = collision.gameObject;
+        if(other.CompareTag("Bullet"))
+        {
+            // zderzyliœmy siê z pociskiem - usuñ pocisk i asteroidê z gry
+
+            //zniszcz pocisk
+            Destroy(other);
+
+            //zniszcz asteroide
+            Destroy(gameObject);
+        }
+    }
 }
